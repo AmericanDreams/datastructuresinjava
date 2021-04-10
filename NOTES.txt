@@ -245,11 +245,15 @@ we wanted delete. And we know how to handle them. So it will also take O(logN) t
 Traversal of BST
 The method to chouse to traverse the BST might be important. There some common ways to do it.
 1) In-order traversal. With this method we start from left node then go to root then go to right recursively. It will give us sorted traversal.
-2) Pre-order traversal. With this method we wisit root then go to left then right recursively.
+2) Pre-order traversal. With this method we visit root then go to left then right recursively.
 3) Post-order traversal. With this method we first visit left then go to right then root recursively.
 
 Generally if the tree becomes very unbalances (for example we create a treee from sorted arrays then it will have only right childs) all the O(logN) operations are going to closer to O(N) linear time complexity. That is why
 it is very important to keep tree as much as possible balanced.
+
+5. BALANCED TREE AVL TREE
+
+
 
 
 
