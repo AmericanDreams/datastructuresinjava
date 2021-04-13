@@ -251,7 +251,104 @@ The method to chouse to traverse the BST might be important. There some common w
 Generally if the tree becomes very unbalances (for example we create a treee from sorted arrays then it will have only right childs) all the O(logN) operations are going to closer to O(N) linear time complexity. That is why
 it is very important to keep tree as much as possible balanced.
 
+Predecessor - > The bigest Item on the left subtree of given node
+Successor -> The smallest item on the right sub tree of given node
+
 5. BALANCED TREE AVL TREE
+
+We learned that BST are way to better than LinkedList for searching operations but in the case it is balanced. If we would create a BST from sorted array we will not get balanced BST
+instead we will get LinkedList which will give us O(N) time complexity for searching. But AVL tree is balanced BST. So AVL Tree are BST only with 1 important differ. If tree is AVL 
+height of 2 child subtree of every node differ by at most one. So it condition never let tree become unbalanced it will alwys make sure tree is balanced.
+
+All the operations are same in AVL tree with BST. (Because eventually AVL is BST tree). Only differ is during the adding new node to Tree we will need check whether tree remains balanced
+or we should adjust it. AVL tree are faster than Red Black tree (Red Black tree is also BST) but construction is more difficult than that. That is why nowadays Red Black trees are more popular.
+
+In Order to keep AVL balanced we might need rotations.
+We might have 4 kind of cases.
+1) Left heavy -> Node has left child and that left child olsa has left child
+Solution. We should rotate the root (root of this subtree) to right.
+
+2) Right heavy -> Node has right node and that right has also right. 
+Solution. We shodul rotate the left
+
+3) Left - right -> Node has left and that left has only right child.
+Solution. First take left of root and rotate to left. After that we will have the case as same as 1st case (heavy left). To solve this ofcourse rotate root to right.
+
+4) Right - left -> Node has right and that right has only left child.
+Solution. First right of root and rotate to right. Then we will have case as same as 2nd (heavy right). To solve this rotate the root to left.
+
+
+Operations of AVL Tree
+
+insert() - > O(N * logN) time complexity. because after adding new value We should check the tree whther it is balanced or not. So of not we will need rotate the some nodes in order to
+achive balanced tree. And in worst cases we might need to rotate all the nodes in the tree that is why we consider time complexity of insertion operation is O(N * logN);
+
+Traversal -> O(logN) as same as normal BST.
+
+Red black trees are more papular than AVL tree becuse after every insertion or deletion we might need rotate some nodes.
+
+
+6. RED BLACK TREE
+Red-black tree is also BST as well as AVL Tree. And it helps us to solve same problem related BST. Because when BST get unbalanced it louses its efficiency RED-BLACK tree tries to keep BST unbalanced. So Red-black tree is
+balanced BST as same as AVL tree is.
+
+Properties of Red-black tree
+1) Each node is eidher RED or BLACK
+2) The root node is always BLACK.
+3) Every RED node should have 2 BLACK childs. (Children of RED should be BLACK). And of courses in this cases RED nodes will have always BLACK parent. 
+4) Every path from given node to any of its descentant (NIL/NULL) noded should contain same number of BLACK nodes.
+
+RED BLACK Tree vs AVL Tree
+
+Red-black tree
+- Linux Kernel relies on heavly Red-black tree data structure
+- Insertion is fast Because it is not rigidly balanced. We dont bother to keep tree as balanced as possible
+- For an insert intensive task use Red-black tree
+- java.util.TreeMap, java.util.TreeSet uses Red-black tree data structure 
+
+AVL Tree
+- Rigidly balanced tree and hense provides faster look-up operation
+- For a look-up intensive task use AVL
+- Insertion and deletion is not so fast because we keep balancing the tree.
+
+After insertion we should check nodes from bottom to top whether Is there red-black tree properties violation. If there we shoud fix it with help of rotation and recoloring. When we insert new node
+into Tree its default color is red. So after insertion during the checking we might have same kind of case which we have different type solution for them.
+
+CASE 1.
+a) Inserted node is the right child of its parent, its parent is the left child of its parent, parent and uncle (uncle node is other child of nodes grandfather) are RED.
+SOLUTION: Recoloring its parent, grandparent and uncle node. So After coloring parent and uncle are going to be BLACK, grandparent is going to be RED.
+
+b) Inserted node is left child of its parent, its parent is right child of its parent and parent and uncle node are RED. 
+SOLUTION: Recoloring Its parent, grandparent and uncle color. So after recoloring operation parent and uncle are going to be BLACK, grandparent is going to be RED;
+
+CASE 2.
+a) Inserted node is a right child, parent is left. Parent is RED, uncle is BLACK.
+Solution: Left rotation of parent node.
+
+b) Inserted node is left child, parent is right. Parent is RED,uncle is BLACK.
+Solution: Right rotation of parent.
+
+CASE 3.
+a) Inserted node is left child, parent is left child. parent is RED, uncle is BLACK.
+Solution: First we should Right rotate the gradparent then swap the color of parent and grandfather
+
+b) Inserted node is right child, parent is right child. Parent is RED, uncle is BLACK.
+Solution: First left rotation of grandparent then swap the colors of grandparent an parent.
+
+CASE 4:
+a) Inserted node is left child, parent is left child. Parent is RED and uncle is RED.
+Solution: Recoloring parent to BLACK, uncle to BLACK and grandparent to RED;
+
+b) Inserted node is right child, parent is right child. Parent is RED and uncle is RED.
+Solution: Recoloring parent to BLACK, uncle to BLACK, grandparent to RED.
+
+
+
+7. SPLAY TREE
+
+
+
+
 
 
 
