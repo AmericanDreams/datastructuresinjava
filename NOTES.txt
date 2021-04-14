@@ -346,6 +346,55 @@ Solution: Recoloring parent to BLACK, uncle to BLACK, grandparent to RED.
 
 7. SPLAY TREE
 
+Splay tree is al BST so all properties which were true for BST are the same for Splay tree. But splay tree is a little bit different from other special trype of BST which we learned such as AVl and Red-Black tree. Because aim of them were
+keeping tree as balanced as possible. Specially AVL tree is very serious about it. But it is not the aim of the Splay tree. Aim of Splay tree is providing very fast to the items which were accessed recently.
+
+About Splay tree
+- It is type of Binary search treee(BST)
+- Most operations have O(logN) complexity but some are very slow O(N)
+- Unlike AVL tree it is not stricly balanced that is why it is faster
+- It is easy to implement
+- The most popular data strucre in the industry
+- Fast access to the elements which were accessed recently
+- It can be used for Cache implemetation
+
+FIND operation
+Find operation is exactly the same as how it is for General BST but with only one difference. After finding the item in the tree we should move it to the root of the by help of rotations. In this way for the next find operations this item
+will be ble to be accedded very fast. Because it 'll be root. And it is called "splaying". We might need to make several rotation operation in order to move it to root.
+
+After finding the item in the tree in order to make a rotation we should choouse which strateg to use. Because we might have 3 kind of cases there.
+1) Zig-zag
+2) Zig-zig
+3) Zig
+
+
+ZIG-ZAG
+a) The item is left child , parent of it is right child.
+SOLUTION: Right rotation of the item.
+
+b) The item is right child , parent is left child.
+SOLUTION: Left rotation of the item.
+
+
+ZIG-ZIG
+a) The item is left child, parent is left as well.
+SOLUTION: Right rotation of the item
+b) The item is right child, parent is right as well.
+SOLUTION: Left rotation of the item
+
+ZIG
+a) The item is the left child of the root
+SOLUTION: Right rotation of the item
+
+b) The item is the right child of the root
+SOLUTION: Left rotation the item
+
+NOTE: Bsically if the node is the left child just rotate to right, but if the item if the right child just rotate to the left.
+
+
+
+
+
 
 
 
