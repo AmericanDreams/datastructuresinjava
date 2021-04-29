@@ -389,7 +389,215 @@ SOLUTION: Right rotation of the item
 b) The item is the right child of the root
 SOLUTION: Left rotation the item
 
-NOTE: Bsically if the node is the left child just rotate to right, but if the item if the right child just rotate to the left.
+NOTE: Bsically if the node is the left child just rotate to right, but if the item is the right child just rotate to the left.
+
+
+8. B-TREE
+
+B-Tree is NOT BST but it has very similar characteristics. Actually every BST is B-tree. B-tree is general version of BST. BST is one of the variant of it.
+
+- B-tree are slef balancing like data structure.
+- Operations. insertion deletion, sequencial access and searching are supported.
+- Most of the operations has O(logN) time complexity.
+- Important diffirent from BST is each node can have more then 2 children and each node can have more than 1 keys (data).
+- B-tree is optimized for sytems which reads and writes large amount of data
+- Is is commonly used in databases and filesystems.
+
+Lets imagine the node stores 2 keys in it. then it will have 2 branch hanse 3 subtree. it is al3wys like this. if the node contains m elements then branching factor is m+1.
+But the basic principle of BST is also true here it means always the data stored in the left subtee of key is smaller than key. In the BST node itself keeps refernces to his subtree or branches
+but in B-tree keys of nodes keeps refernces to his subtree s. Even they might have common references. For example node has 2 keys then 3 subtree. That subtree in the middle or second one is common.
+Because it is right subtree of 1st key and in the meantime left subtree of second key.
+
+Also nodes dont need to be entirelly full. They might contain sometimes empty keys. B-tree dont need ot be balanced stricly such as AVl tree. That is why it waste memory more than AVL.
+
+In general
+- If the node can contain m keys it can contain m+1 subtree at most
+- Every node is at leats half full
+- If the count of elements in the node is less than m/2 (means node is more empty than half full) it should be merged with another node
+- The root node has at leats 2 childeren if it is not a leaf node
+- Every path from root to the leaf contains same amount of node 
+- All keys stored in the node which is common node of 2 keys in his parent node are between the value of his parents keys. For example nde contain 2 elemets. then it have 3 subtree. the values stored in the middle subtree
+should be beetwen those 2 keys of his parent node.
+- Items in the each node are stored in sorted order
+
+
+One of the mos popular variant of B-tree is called 2-3 B-tree.
+Properties of 2-3 B-tree are below:
+- Every node can have 2 keys or elements at most.
+- Every node can have 3 children at most
+- All leaves are at same level
+- All data is kept in sorted order inside the node
+
+Most of the time when we work wit HashTable, AVL etc. we never consider memory access time because we know all the data we are using is stored in the RAM. And it is true. But sometimes we have to deal very big amount of data
+even bigger than size of RAM. So Because the those big data not stored in the RAM it is stored in the External disk or hard drive whatever but always memory access is slower than RAM. in that kid of case we need considering
+Memory access time when we chose the data structure we'll use. We should use the data structure which requred less memory access because this operation is costy for us. For example databases, file systems.
+And in this kind of scenarios B-tree cames to help. It outperforms BST when memory access time is considered from external disk. Bceause height of tree is aways smaller than BST (because every node can contain more than 1 key)
+total disk access is significantly reduced for B-tree comparing to BST.
+We shoudl keep in mind BST is actually better than B-tree when consediring RAM (fast access meory), But B-tree is better than BST when dealing with slow memory access such as external disk.
+
+Working strategy of HARD DRIVE and RAM is different. From HARD DISK yes access time is vay to smallar than RAM (even more than 10000 times on avarege). But hard disk reads big amount of time in each reading than return back.
+So for example even though we need just an integer which is 4 BYTE , when we need access than from hard disk hard disk actually reads 4096 BYTE. And that is to keep a lot of keys in the each node heps us when dealing with
+external disk. So during the searching instead of recirsive methods and try to find where is the given node we will have more keys in the one node that will give us chanse to find given node
+in less recursion comparing to BST.
+
+9. PRIORITY QUEUE
+
+- It is an abstract data type such as stack and queue
+- But every item has addititional priority. A priority value
+- In Priority queue the item with higer priority is served before the item with lover pririty
+- Priority queue is usually implemented with heps but it can also be implemented with help of self balancing tree
+
+OPERATIONS
+1) insertWithPriority(item, priority);
+This method will inset an item with priority. Just keep in mind some times if the type of item in the queue is integer or number , value of item itself can bu used as priority. So in this way
+we will have a sorted queue which will retrive the data in DESC order
+
+2) getHighestPriorityItem();
+Return the item with highest priority. As I mentioned earlier if we define the priority value as same as the value of item this method will return the biggest item from queue.
+Keep in mid if Priority queue is implemented with help of heaps after retreving the the item we will need do reconstruct the heap. Because after retreving te item we should remove that from the list.
+
+3) peek();
+It will jst the item with hhightest priority but will net remove the item from queue
+
+10. HEAP
+
+- It is basically a binarry tree but with sum differences
+- There are 2 main diferent heap type. Minimum heap and Maximum heap
+- in Max Heap values of children are always smaller or equal to their parent. And The root element is always have the highest value in the tree
+- In a Min heap the values of children are alwsays bigger or equal to perent and the root element is alwys the smallest one
+- It is complete and balanced tree. We should keep in mind inserting process here different. In the binnary tree we used to check if the value is bigger it should be right child and etc. bt here we dont have that 
+requirement. Only requirement is we should put the item into next avaliable space which is finfing from left to right. Here we just try to keep tree walys balanced but visiually. We dont bother about the values.
+Regarding the comprassion of values only requirement is if it is for example max tree then children should be smaller or equal to their parent. But that is all. We dont spesify anything about smaller should be left or etc.
+We just kind of trying to fill tree layer by layer. After completing for exmple second layer (the layer after root) we move forwayd to 3rd layer from left to right.
+
+- The heap is one maximally eficient implementation of priority queue abstract data type. (Even priority queues often referred as heaps regardless of how they are implemented)
+- Even thought it has same name as HEAP memory but it has nothing to do with that
+- In the binary heap every parent can have 2 children at most
+
+
+Inserting operations
+Lets imagine it is max heap. Basicaly we just insert the new item to next avaliable spave firstly after that we check the Max heap properties that if is it violated. If we see there is a cild which is bigger that its parent we simple
+swap them and keep checking until the root. And it will take O(N) time complexity
+
+Removal operation
+Lets imagine we have Max heap again. And we wanna remove the hightest value which is root. We simple remove it then take the last item in the tree and put to the root. After that we start checking the Max hep properity as well to know that if it 
+is violated or not. We simple checking the new root item with ites bigger child and if it is bigger that the new root (mostly yes) we swap and so on. And overall it removal operation will take O(logN) time complexity.
+JUST keep in your mind that if would like to remove an arbitrary item from the heap it will take N(N) time complexity because we should first the item with iterating the whole tree and after that remove it.
+
+
+HEAPSORT
+- It is a comparasion based sorting algorithm
+- It uses heap data structure rther than linear time search to find the biggest item
+- A bit slower in practice in most fo the machines than a well implemented quick sort. But it has advantage of more favorable worst case time complexity. O (N * LogN)
+- It is in place algorithm
+
+Basically this algorithm is about that we create the Heap from given items after that first return the root item whih is biggest in Max heap. after that we swap that with latest item in the heap and very importantly put to flag to
+this item in order to know we will not consider this anymore. It is kind of excluding it from Heap. And after this we sheck whether is there property of Max heap violated or not. If yes we swap so on. After this operation we will have again
+valid Max Heap in our hand (ecept that marked and exclused item. It can stay in the end even thought violates max heap property. because it is marked already we no longer consider that). And repeating again. taking the root item and so on.
+Because we have N items in the heap we might need apply swapping operation to all of them in the worst case and that is will it will take O(N * logN) time complexity
+
+PriorityQueue implementation in JDK
+https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/PriorityQueue.html
+
+10. ASSOCIATIVE ARRAY
+
+- Associative array or dictioanary or map is abstract data type
+- Composed of collection of key value pairs where each key appers only once
+- Most of the time we implement Associative array with HashTable but BST is also can be used
+
+Operations
+- Adding key value pair to the collection
+- Rempvong key value pair from collection
+- Updating value of given key
+- Retrieving the value of the given key
+
+A Hashtable or Hashmap or Dictionary is a Data structure which implement Associative Array ADT. Hashtable uses hash function to compute the index also called hash code into array of bucket or slots which desired value can be found.
+During the look up Hashtable again takes the key and generate the hash code to find that  in which should can the key pair with given key found.
+
+
+About Hashtable 
+If we wanna to get our lookup operation in O(1) time we might use Array like structure where we can retrieve the value with given index in O(1). Hashtable uses also same strategy but here we should find based on key in which index
+we should store the given key value pari. Hash function is for it. Hash function taking the gey and generating the index number which is beetwen the range of 0 and (array.length - 1). And after that it stores given key value in that index.
+During the lookup it does same hashing function and finding thekey value pair in the slot where it should be. The easiest way to do it after fenerating the hash from given key we shoudl mod it (has(key) % array.length). Because it makes sure
+we will ways get value fro which is beetwen the range of (0 and array.length) whch is very important for us.
+
+COLLISION
+Because in the end the array which we will use as slots or buckets has limited amount of size and we will have stiuation he index for different keys which is generated for storing key value pairs in the bucket will be same. In tis stiuation called collision.
+We have some strategies to handle this kind of stiuation.
+
+1. Chaining
+Basically we store the value in in linked list. In every slot of array actually stores the linked list. In this way if we would have same index generated from hash function for given 2 keys they both will be stored in the same index as 
+nodes of linked list. Implementation of it very easy but we should keep in our mind that if our hash function would generate same index for a lot of keys in the end we will louse O(1) time complexity especially for look up operation and even in the wors
+ case it will be O(N). That is why we will need to make sure our hash function can distribute the value well beetwen the array slots.
+
+2. Open addressing
+Here instead of creating a linked list and stores value there we chose different method. If we would notice that the slot of array with given index is full we for example going to next avaliable slot and store the key value there. And we might
+chouse here also different ways ofr finding nextavaliable slots. For example
+a) Linear probbing
+If slot is not empty go to next slot if it is also busy go to next one so on.
+
+b) Quatratic probbing
+If the slot is busy we try 1,2,4,8.. for away slot and try to find empty one.
+
+c) Rehashing
+We hash the result again in order to find empty slot
+
+Time compleixt of operations
+- Searching -> O(1), O(N) in the worst case
+- Inserting -> O(1), O(N) in the worst case
+- Removing -> O(1), O(N) in the worst case
+
+
+Space complexity is -> O(N)
+
+Dynamic resizing
+We learned that how to handle collissions. But to avouid collision happening a lot we can dynamically reside the Hashtable. It means if we check and see there a lot of entries in the hashtable compared its slots size
+we know in this kind of stiuation collision can happen a lot. And that is why we resize de underline array. But it is very costy operation because we should hash every entries one by one again in order to know
+in which index of new rezied array they should be stored. So rezizing wil, take O(N) time complexity.
+
+How we dice dynamic rezising in needed ? We can know this after calculating LOAD FACTOR of hashtable. LOAD FACTOR = countOfEntries divided by countOfArraySlots. n/m
+For example we have an array underline with 16 slot. And we see there is 4 entries in the hashtable. It means load factor = 0.25 which is not a big number. For example in Java after Load factor excided 0.75 HashMap resize its
+underline array. 
+
+
+Map implementations in JDK
+TreeMap -> It is sorted may (by keys) and dont accept any null key but accpets null values. And the keys shoudl implement Comparable interface or we should use the constructor of which we can pass our custom Comparator.
+HashTable -> syncronized Map implementation. IAnd it is slow because all methods are syncronized.
+HashMap -> accpets only 1 null key and how much ever we want null values. There is no order guarantin like a TreeMap. And it is not syncronized beasically it is faster than HashTable.
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -25,6 +25,7 @@ public class Test {
         System.out.println(stack.pop());
 
         System.out.println(stack.size());
+        System.out.println(1 % 7);
 
 
 
