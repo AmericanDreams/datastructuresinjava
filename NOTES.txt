@@ -567,6 +567,92 @@ HashMap -> accpets only 1 null key and how much ever we want null values. There 
 
 
 
+11. Trie Data Structure
+
+- Trie DS (digital Tree or prefix Tree) is tree like DS
+- Very similar to BST but of course with some additional feature
+- Usually they are used as Associative Arrays (Dictionary or hashmap) in order to store key-value pairs but where keys are usually string
+- Very important ! Trie outperforms hashing based Associative Arrays. (Means Trie doing better than HashTable)
+
+What is the motivation behind Trie DS ?
+We have already learned about Hashmap which is also DS which allows us to store key-value pairs efficiently. But there are 2 main concern here. First of all
+there is collision problem on hashmap. Because it is not possible to create perfect hash function sometimes collision happens. And because of the collision
+we expect Hashmap will run on O(N) time complexity in the worst case. Second concern is sorting feature. As we learned about HashMap it does not have
+sorting feature built in. And it is also kind of one of the disadvantage of HashMap.
+
+
+About Tries
+- It is DS is used to implement Associative Array ADT
+- Unlike BST no node in the Trie stores key associative with given node.
+- Its position in the tree defines the key with which is associated
+- All the descendants of a node have common prefix of string associated with that node
+- The root is associated with empty string
+- Not all node contains value
+
+Basically it is like a tree but every node stores key which is 1 character of alphabet. For example let's imagine we use only english alphabet which has 26 cha-
+racters. As we told earlier root node stores empty string. after than root node will have at most 26 node. And every child of root also will have at most
+26 nodes so on... Every node stores only 1 character that is why for example we wanna insert (put("ab", someValue)) "ab" key into Trie. Then it's depth will be 2
+because we will first insert node with "a" key into root after than another node with "b" node into that new node which is inserted with "a" key.
+So last view is (root, "") -> ("a") -> ("b", someValue)  .
+So as we can see from here we might have way more nodes comparing to BST. Because here every node might have 26 nodes. So That is why Trie is not memory efficient.
+But as we can see from here also it will work quite fast. Especially during searching operation based on  characters of key we will easly track the nodes and
+find the value if it is stored. So that is why we say time complexity of searching operation in Trie depends on length of the characters in the given key. So unlike
+a hashmap it is not depend on the count of the items in the Trie. That is why we no more have here the worst case O(N). Our time complexity is totally relies
+length of the key which is really good comparing to hashmap.
+
+So as we talked also earlier always if we wanna have faster DS it is not very memory efficient.
+
+- Operations
+
+- Insert O(M); M = length of the key
+During insert based on the characters of key we create the node with each letter (from first letter until end) if it does not exists and in the end when we reach the
+leaf node we insert the value there. But another important thing here is because each node might have a lot of node (26 for english alphabet) in which side (left or right)
+the node should be stored is important. Here when we insert the node node with new character into the parent  we should compare the value with the value of the node.
+if the letter we wanna insert is smaller (unicode value) than node then we should insert this new node as left child. If not then right child. with this way
+children of parent will be stored as sorted (from left to right) in the node.
+
+- Search O(M); M = length of the key
+During the search based on letters of given node (from left to end) we iterate through Trie and find the leaf node. Some times in the middle of the characters of key
+we can notice there no anymore the node with next letter which we are looking for. It means this key does not exits in the Trie. This kind of scenarios are even better
+because here time complexity even smaller than length of the characters. Which is concerned very very fast. But if we reach the the last letter of the key
+and in the associativeArrayWithTrie then we know the value might be stored in that node. So if yes we retrieve the value.
+
+- Sorting O(N); N =  count of nodes in the Trie
+Sorting is quite easy. Simply we make in-order traversal (left->parent->right) which will give us value in sorted way.
+
+Now days Autocomplete feature in a input is very popular in the applications or websites. Such as google search etc. And this feature can be done with the help of
+Trie data structure.
+
+
+Hashing based Associative Array vs Trie based associative array
+- For searching operation Trie based AA is way too better than hashing based AA. Because in the case of Trie running time of searching
+is depend on size of the given key M. And in the worst case it is O(M). But in the case of hashing because of the collision problem it is
+depend on the count of the items in the hashtable N. So running time is O(N).
+- There is no collision problem in case of trie based AA
+- Trie support sorting feature
+- Hashing based AA is way to better than Trie based when memory management concern. Because When we create hashtable it is just an array we keep data and
+first of all we have quick access (reading from RAM) secondly because we use array we dont waste a lot of memory. But in case of trie we store data as a node.
+And it will require a lot of reading operation from Memory device.
+- If we are using external memory which is reading operation is very slow in that case Hashing based AA will be better for us because it has fewer reading operation.
+
+
+12. Ternary Search Tree (TST)
+
+TST is actualy special type of Trie or prefix Tree. Difference is nodes of TST  can have at most 3 children.
+TST is more memory efficient than Trie but Trie is faster than TST. Is is also used for same reasons which Trie is used. Mostly to implement
+Associative array or to implement spell-checking (autocomplete feature).
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	
