@@ -5,35 +5,38 @@ public class RabinKarbSolution {
         System.out.println(subString("salam", "lam"));
     }
 
-    // O(N * M) ; N = text.length(), M = pattern.length()
+    //With very Simple rollish hashing function
     private static int subString(String text, String pattern) {
-        if (text.length() < pattern.length()) return -1;
+        int hashOfPattern = hash(pattern, 0, pattern.length()-1);
+        int hashOfText = 0;
 
-        double patternHash = hash(pattern);
-        double hash = 0;
-        OUTER: for (int i = 0; i <= text.length() - pattern.length(); i++) {
+        for (int i = 0; i < text.length(); i++) {
+
             if (i == 0) {
-                hash = hash(text.substring(0, pattern.length()));
+                // First iteration
+                hashOfText = hash(text, i, i + pattern.length() - 1);
             } else {
-                hash = (hash - hash(text.substring(i - 1, i)) * Math.pow(2, pattern.length()-1)) * 2 +
-                        hash(text.substring(i+pattern.length() - 1, i+pattern.length()));
+                hashOfText = hashOfText - text.charAt(i-1) + text.charAt(i + pattern.length() - 1);
             }
 
-            if (hash == patternHash) {
-                for (int j = 0; j < pattern.length(); j++) {
-                    if (text.charAt(i + j) != pattern.charAt(j)) continue OUTER;
+            if (hashOfPattern == hashOfText) {
+                int j = 0;
+                for (; j < pattern.length(); j++) {
+                    if (pattern.charAt(j) != text.charAt(i + j)) break;
                 }
-                return i;
+
+                if (j == pattern.length()) return i;
             }
+
         }
         return -1;
     }
 
-    private static double hash(String text) {
-        double hash = 0;
-        for (int i = 0, j = text.length() - 1; i < text.length(); i++, j--) {
-            hash += text.charAt(i) * Math.pow(2, j);
+    private static int hash(String text, int start, int end) {
+        int result = 0;
+        for (; start <= end; start++) {
+            result += text.charAt(start);
         }
-        return hash;
+        return result;
     }
 }

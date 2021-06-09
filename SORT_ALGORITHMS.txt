@@ -1,0 +1,100 @@
+
+1. Bogo sort or Permutation sort
+
+Logic of this algorithm basically is creating ramdon permutation (same array but values in different orders) and check which one
+is sorted. Whenever we found that given permutation of array is sorted basically we stop creating new permutation.
+
+It is very inefficient algorithm in classical computers but is very efficient in Quantum computers.
+
+Time complexity of this algorithm will be O(N!);
+
+IN-PLACE +
+STABIL -
+ADAPTIVE -
+
+2. Bubble Sort
+
+In this algotirhm we iteratively chose every neighbours items in the array compare them and we will se second one in the pair is
+greater than first one we swap their place.
+
+This algotihms has O(N*N) (quatratic) time complexity which is very slow.
+
+IN-PLACE +
+STABIL +
+ADAPTIVE +
+
+3. Selection sort
+
+Here we do linear serach in every iteration and find the minimum item and put it to the left most index. After all iterations
+are done we will achieve sorted array.
+
+Even thought is is also has O(N*N) quatratic time complexity it always outperforms Bubble Sort algorithm.
+
+And actually Selection sort and Insertion sort works quite fast for small size arrays.
+
+Because selection sort requires less write operation it is also considered better one for some cases which is writing
+operation is expensive.
+
+IN-PLACE +
+STABIL -
+ADAPTIVE -
+
+4. Insertion Sort
+
+Here we go one by one starting from first item and compare it with items before it. If we will se tha item in the before is
+greater than given item we swap than one 1 step to right. Whenever we will se the item in the before is smallar than
+current one it means we dont need to shift itmes we have found already place where we should insert the current one.
+
+In the end we will achieve sorted array. Even thought it also has O(N*N) quadratic time complexity it is considered
+one of the best algorithms for arrays which has small size (10 to 20). But it required more writing (shifting in this case)
+operation than selection sort algorithm.
+
+We will than learn one of the variant of this algorithm which is called shell sort which required less writing operation.
+
+And it is online algorithm which means if we stream the data from somewhere and we dont have whole of array yet and have only
+part of it we can use this algorithm over streamed data.
+
+IN-PLACE +
+STABIL +
+ONLINE +
+ADAPTIVE +
+
+5. Shell sort
+
+Shell sort in generalized form of Insertion sort. It has also O(N*N) quadratic time complexity but it required less shifting
+operation than standart Insertion sort. But logic here is same here but only difference is In the case of Insertion sort
+we take step as 1 and that is why compare the neighbour item paris. Here we change step dynamic we start from length/2 step
+and sort all pairs with this distance and of course all sub array of items with this distance than decrese the step count. In the we will
+reach the step = 1 and it will be standart Insertion sort but in that case , most of the items in the array will be sorted and
+Insertion sort will require less shifting operation.
+
+It is adaptive algorithm means will perfor faster if array is partially sorted.
+
+IN-PLACE +
+STABIL -
+ADAPTIVE +
+
+6. Quick sort
+
+Quick sort is considered one of the best sorting algorithm which has average O(N*logN) time complexity. Well implemented quick sort
+is faster than merge sort and about 2 or 3 times faster than heap sort.
+
+It can also has O(N*N) time complexity in the worst case peeking of right pivot index is crucial. If we would peek the largest item
+in the subarray alwys as a pivot value we will louse O(N * logN) time complexity and it will be O(N*N) quadratic.
+
+Java uses quick sort algorithm for sorting of primitive types.
+
+It uses divide and conquer approach so it can be made parallel.
+
+Basically we chose the pivot index (it is random index within range of begin end end index of given array) then store all small
+items of subarray left of it and all bigger items in the right of it. Then we do same procedure for left subarray of this pivot index and
+right subarray of this pivot index. And we keep doing it until we have sub array with 1 item. in the end
+we are having sorted array.
+
+IN-PLACE +
+STABIL -
+ADAPTIVE -
+
+
+
+
